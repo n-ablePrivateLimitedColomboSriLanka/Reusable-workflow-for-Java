@@ -25,6 +25,17 @@ jobs:
           distribution: 'temurin'
           java-version: '8'
           cache: 'maven'
+      - name: Nexus Repo Publish
+        uses: sonatype-nexus-community/nexus-repo-github-action@master
+        with:
+          serverUrl: https://nexus.ci.appinnov.nblrnd.biz/
+          username: ${{ secrets.NEXUS_USERNAME }}
+          password: ${{ secrets.NEXUS_PASSWORD }}
+          format: maven2
+          repository: maven-releases
+          # coordinates: groupId=com.example artifactId=app version=1.0.0
+          assets: extension=jar,war
+          # filename: ./target/app-1.0.0.jar
       - name: Build with Maven
         run: mvn clean verify
       - name: Set up JDK 11
