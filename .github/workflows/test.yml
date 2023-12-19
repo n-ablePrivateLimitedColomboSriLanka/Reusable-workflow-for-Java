@@ -9,10 +9,7 @@ on:
         required: true
       SONAR_PROJECT_KEY:
         required: true
-      NEXUS_USERNAME:
-        required: true
-      NEXUS_PASSWORD:
-        required: true
+     
 
 jobs:
   build:
@@ -23,6 +20,9 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: command
+        env:
+            NEXUS_USERNAME: ${secrets.NEXUS_USERNAME}
+            NEXUS_PASSWORD: ${secrets.NEXUS_PASSWORD}
         id: command
         uses: github/command@v1.1.0
         with:
