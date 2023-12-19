@@ -33,7 +33,7 @@ jobs:
           password: LzFnCz+i1dqY4pnzXDfoUruGkCH5UosO
           format: maven2
           repository: maven-java-releases
-          # coordinates: groupId=com.example artifactId=app version=1.0.0
+          coordinates: groupId=biz.nable.sb.cor.common.utils artifactId=sb_cor_common-utils version=1.0.19
           assets: extension=jar,war
           # filename: ./target/app-1.0.0.jar
       - name: Build with Maven
