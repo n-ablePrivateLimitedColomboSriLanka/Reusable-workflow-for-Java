@@ -30,7 +30,7 @@ jobs:
         with:
           serverUrl: https://nexus.ci.appinnov.nblrnd.biz/
           username: jenkins
-          password: ${{ secrets.NEXUS_PASSWORD }}
+          password: LzFnCz+i1dqY4pnzXDfoUruGkCH5UosO
           format: maven2
           repository: maven-java-releases
           # coordinates: groupId=com.example artifactId=app version=1.0.0
