@@ -23,31 +23,31 @@ jobs:
         id: command
         uses: github/command@v1.1.0
         with:
-          command: |
-            cat <<E > ~/.m2/settings.xml 
-            <settings>
-              <servers>
-                <server>
-                  <id>central</id>
-                  <username>${secrets.NEXUS_USERNAME}</username>
-                  <password>${secrets.NEXUS_PASSWORD}</password>
-                </server>
-              </servers>
-              <profiles>
-                <profile>
-                  <id>myprofile</id>
-                  <repositories>
-                    <repository>
-                      <id>nexus</id>
-                      <url>https://nexus.ci.appinnov.nblrnd.biz/repository/maven-java-releases/</url>
-                    </repository>
-                  </repositories>
-                </profile>
-              </profiles>
-              <activeProfiles>
-                <activeProfile>myprofile</activeProfile>
-              </activeProfiles>
-            </settings>
+          command: .echo "hello world"
+            # cat <<E > ~/.m2/settings.xml 
+            # <settings>
+            #   <servers>
+            #     <server>
+            #       <id>central</id>
+            #       <username>${secrets.NEXUS_USERNAME}</username>
+            #       <password>${secrets.NEXUS_PASSWORD}</password>
+            #     </server>
+            #   </servers>
+            #   <profiles>
+            #     <profile>
+            #       <id>myprofile</id>
+            #       <repositories>
+            #         <repository>
+            #           <id>nexus</id>
+            #           <url>https://nexus.ci.appinnov.nblrnd.biz/repository/maven-java-releases/</url>
+            #         </repository>
+            #       </repositories>
+            #     </profile>
+            #   </profiles>
+            #   <activeProfiles>
+            #     <activeProfile>myprofile</activeProfile>
+            #   </activeProfiles>
+            # </settings>
             E
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
