@@ -19,32 +19,44 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      # - uses: actions/checkout@v4
-      # - uses: actions/setup-java@v4
-      #   with:
-      #     distribution: 'temurin'
-      #     java-version: '8'
-      #     cache: 'maven'
-      - uses: actions/checkout@v1
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
+      - name: command
+        id: command
+        uses: github/command@vX.X.X
         with:
-          java-version: 1.8
+          command: |
+            cat <<E > ~/.m2/settings.xml 
+            <settings>
+              <servers>
+                <server>
+                  <id>central</id>
+                  <username>${secrets.NEXUS_USERNAME}</username>
+                  <password>${secrets.NEXUS_PASSWORD}</password>
+                </server>
+              </servers>
+              <profiles>
+                <profile>
+                  <id>myprofile</id>
+                  <repositories>
+                    <repository>
+                      <id>nexus</id>
+                      <url>https://nexus.ci.appinnov.nblrnd.biz/repository/maven-java-releases/</url>
+                    </repository>
+                  </repositories>
+                </profile>
+              </profiles>
+              <activeProfiles>
+                <activeProfile>myprofile</activeProfile>
+              </activeProfiles>
+            </settings>
+
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '8'
+          cache: 'maven'
       - name: Build with Maven
         run: mvn clean verify
-      - name: Nexus Repo Publish
-        uses: sonatype-nexus-community/nexus-repo-github-action@master
-        with:
-          serverUrl: https://nexus.ci.appinnov.nblrnd.biz/
-          username: jenkins
-          password: LzFnCz+i1dqY4pnzXDfoUruGkCH5UosO
-          format: maven2
-          repository: maven-java-releases
-          coordinates: groupId=biz.nable.sb.cor.common.utils artifactId=sb_cor_common-utils version=1.0.19
-          assets: extension=jar,war
-          # filename: ./target/app-1.0.0.jar
-      # - name: Build with Maven
-      #   run: mvn clean verify
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
