@@ -20,11 +20,8 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: command
-        # env:
-        #     NEXUS_USERNAME: ${secrets.NEXUS_USERNAME}
-        #     NEXUS_PASSWORD: ${secrets.NEXUS_PASSWORD}
         id: command
-        uses: github/command@v1.1.0
+        uses: github/command@vX.X.X
         with:
           command: |
             cat <<E > ~/.m2/settings.xml 
@@ -51,7 +48,7 @@ jobs:
                 <activeProfile>myprofile</activeProfile>
               </activeProfiles>
             </settings>
-
+            E
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
