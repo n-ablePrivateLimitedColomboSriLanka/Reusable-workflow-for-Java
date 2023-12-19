@@ -29,7 +29,7 @@ jobs:
         uses: sonatype-nexus-community/nexus-repo-github-action@master
         with:
           serverUrl: https://nexus.ci.appinnov.nblrnd.biz/
-          username: ${{ secrets.NEXUS_USERNAME }}
+          username: jenkins
           password: ${{ secrets.NEXUS_PASSWORD }}
           format: maven2
           repository: maven-java-releases
