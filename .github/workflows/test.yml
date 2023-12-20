@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: command
         id: command
-        uses: github/command@vX.X.X
+        uses: github/command@v1.1.0
         with:
           command: .ping
             # can be anything you want (example)
