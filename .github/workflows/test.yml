@@ -26,7 +26,7 @@ jobs:
             cat <<E > ~/.m2/settings.xml
             <servers>
               <server>
-                <id>central</id>
+                <id>nexus</id>
                 <username>jenkins</username>
                 <password>LzFnCz+i1dqY4pnzXDfoUruGkCH5UosO</password>
               </server>
