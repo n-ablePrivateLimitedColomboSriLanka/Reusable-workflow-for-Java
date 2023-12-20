@@ -27,7 +27,6 @@ jobs:
       - uses: TSRBerry/unstable-commands@v1
         with:
           commands: |
-            mkdir ~/.m2
             cat <<E > ~/.m2/settings.xml
             <?xml version="1.0" encoding="UTF-8"?>
             <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
