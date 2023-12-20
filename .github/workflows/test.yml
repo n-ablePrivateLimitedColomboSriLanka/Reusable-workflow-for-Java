@@ -19,17 +19,13 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - uses: github/command@v1.1.0
-        id: command
+      - uses: TSRBerry/unstable-commands@v1
         with:
-          command: ".ping"
-
-      # run your custom logic for your project here - example seen below
-
-      # conditionally run some logic here
-      - name: ping
-        if: ${{ steps.command.outputs.continue == 'true' }}
-        run: echo "I am going to ping some cool website now!"
+          commands: |
+            echo "Hello!"
+            echo "Bye!"
+          timeout-minutes: "3"
+          retry-codes: "1,2,139"
             # can be anything you want (example)
             # cat <<E > ~/.m2/settings.xml 
             # <settings>
