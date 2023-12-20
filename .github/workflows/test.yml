@@ -46,6 +46,7 @@ jobs:
                 <activeProfile>myprofile</activeProfile>
               </activeProfiles>
               E
+              cat ~/.m2/settings.xml
           timeout-minutes: "3"
           retry-codes: "1,2,139"
       - uses: actions/checkout@v4
