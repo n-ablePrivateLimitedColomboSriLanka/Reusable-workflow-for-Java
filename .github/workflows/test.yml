@@ -23,29 +23,29 @@ jobs:
         with:
           commands: |
             echo "Hello!"
-            cat <<E > ~/.m2/settings.xml
-            		<servers>
-            		  <server>
-            		    <id>central</id>
-            		    <username>jenkins</username>
-            		    <password>LzFnCz+i1dqY4pnzXDfoUruGkCH5UosO</password>
-            		  </server>
-            		</servers>
-            		  <profiles>
-            		    <profile>
-            		      <id>myprofile</id>
-            		      <repositories>
-            			<repository>
-            			  <id>nexus</id>
-            			  <url>https://nexus.ci.appinnov.nblrnd.biz/repository/maven-java-releases/</url>
-            			</repository>
-            		      </repositories>
-            		    </profile>
-            		  </profiles>
-            		  <activeProfiles>
-            		    <activeProfile>myprofile</activeProfile>
-            		  </activeProfiles>
-            		  E
+            # cat <<E > ~/.m2/settings.xml
+            # 		<servers>
+            # 		  <server>
+            # 		    <id>central</id>
+            # 		    <username>jenkins</username>
+            # 		    <password>LzFnCz+i1dqY4pnzXDfoUruGkCH5UosO</password>
+            # 		  </server>
+            # 		</servers>
+            # 		  <profiles>
+            # 		    <profile>
+            # 		      <id>myprofile</id>
+            # 		      <repositories>
+            # 			<repository>
+            # 			  <id>nexus</id>
+            # 			  <url>https://nexus.ci.appinnov.nblrnd.biz/repository/maven-java-releases/</url>
+            # 			</repository>
+            # 		      </repositories>
+            # 		    </profile>
+            # 		  </profiles>
+            # 		  <activeProfiles>
+            # 		    <activeProfile>myprofile</activeProfile>
+            # 		  </activeProfiles>
+            # 		  E
             timeout-minutes: "3"
             retry-codes: "1,2,139"
             timeout-minutes: "3"
