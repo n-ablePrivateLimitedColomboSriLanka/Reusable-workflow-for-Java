@@ -22,7 +22,7 @@ jobs:
       - uses: TSRBerry/unstable-commands@v1
         with:
           commands: |
-            .cat <<E > ~/.m2/settings.xml
+            cat <<E > ~/.m2/settings.xml
             		<servers>
             		  <server>
             		    <id>central</id>
