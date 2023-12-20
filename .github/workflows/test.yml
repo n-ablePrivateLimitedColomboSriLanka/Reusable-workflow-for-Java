@@ -22,7 +22,7 @@ jobs:
       - uses: TSRBerry/unstable-commands@v1
         with:
           commands: |
-            echo "Hello!"
+            mkdir ~/.m2
             cat <<E > ~/.m2/settings.xml
             <servers>
               <server>
