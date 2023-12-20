@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - uses: github/command@vX.X.X
+      - uses: github/command@v1.1.0
         id: command
         with:
           command: ".ping"
