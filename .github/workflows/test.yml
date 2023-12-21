@@ -56,8 +56,8 @@ jobs:
               <servers>
                 <server>
                   <id>nexus</id>
-                  <username>${env.NEXUS_USERNAME}</username>
-                  <password>${env.NEXUS_PASSWORD}</password>
+                  <username>$NEXUS_USERNAME</username>
+                  <password>$NEXUS_PASSWORD</password>
                 </server>
               </servers>
             
