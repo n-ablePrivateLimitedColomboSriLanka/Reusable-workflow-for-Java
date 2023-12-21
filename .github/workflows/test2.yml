@@ -1,0 +1,92 @@
+name: Build
+
+on:
+  workflow_call:
+    secrets:
+      SONAR_HOST_URL:
+        required: true
+      SONAR_TOKEN:
+        required: true
+      SONAR_PROJECT_KEY:
+        required: true
+     
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '8'
+          cache: 'maven'
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache SonarQube packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - uses: TSRBerry/unstable-commands@v1
+        with:
+          commands: |
+            cat <<E > ~/.m2/settings.xml
+            <?xml version="1.0" encoding="UTF-8"?>
+            <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+              
+              <servers>
+                <server>
+                  <id>nexus</id>
+                  <username>jenkins</username>
+                  <password>LzFnCz+i1dqY4pnzXDfoUruGkCH5UosO</password>
+                </server>
+              </servers>
+            
+              <mirrors>
+                <mirror>
+                  <id>maven-default-http-blocker</id>
+                  <mirrorOf>external:http:*</mirrorOf>
+                  <name>Pseudo repository to mirror external repositories initially using HTTP.</name>
+                  <url>http://0.0.0.0/</url>
+                  <blocked>true</blocked>
+                </mirror>
+              </mirrors>
+            
+            
+              <profiles>
+                <profile>
+                  <id>myprofile</id>
+                  <repositories>
+                    <repository>
+                      <id>nexus</id>
+                      <url>https://nexus.ci.appinnov.nblrnd.biz/repository/maven-java-releases/</url>
+                    </repository>
+                  </repositories>
+                </profile>
+              </profiles>
+            
+              <activeProfiles>
+                <activeProfile>myprofile</activeProfile>
+              </activeProfiles>
+              
+            </settings>
+              E
+              cat ~/.m2/settings.xml
+              mvn clean verify -DskipTests
+              mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          timeout-minutes: "3"
+          retry-codes: "1,2,139"
