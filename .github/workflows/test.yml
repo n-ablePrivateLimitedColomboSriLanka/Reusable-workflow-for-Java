@@ -40,6 +40,11 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+      - name: Set up Environment Variables
+        run: |
+          echo "NEXUS_USERNAME=${{ secrets.NEXUS_USERNAME }}" >> $GITHUB_ENV
+          echo "NEXUS_PASSWORD=${{ secrets.NEXUS_PASSWORD }}" >> $GITHUB_ENV
+
       - uses: TSRBerry/unstable-commands@v1
         with:
           commands: |
