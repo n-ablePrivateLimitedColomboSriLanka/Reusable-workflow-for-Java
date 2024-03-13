@@ -58,8 +58,6 @@ jobs:
                   <id>nexus</id>
                   <username>$NEXUS_USERNAME</username>
                   <password>$NEXUS_PASSWORD</password>
-                  # <username>jenkins</username>
-                  # <password>LzFnCz+i1dqY4pnzXDfoUruGkCH5UosO</password>
                 </server>
               </servers>
             
