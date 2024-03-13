@@ -42,10 +42,8 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Set up Environment Variables
         run: |
-          # echo "NEXUS_USERNAME=${{ secrets.NEXUS_USERNAME }}" >> $GITHUB_ENV
-          # echo "NEXUS_PASSWORD=${{ secrets.NEXUS_PASSWORD }}" >> $GITHUB_ENV
-          echo "NEXUS_USERNAME=jenkins" >> $GITHUB_ENV
-          echo "NEXUS_PASSWORD=LzFnCz+i1dqY4pnzXDfoUruGkCH5UosO" >> $GITHUB_ENV
+          echo "NEXUS_USERNAME=${{ secrets.NEXUS_USERNAME }}" >> $GITHUB_ENV
+          echo "NEXUS_PASSWORD=${{ secrets.NEXUS_PASSWORD }}" >> $GITHUB_ENV
 
       - uses: TSRBerry/unstable-commands@v1
         with:
